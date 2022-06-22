@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AllLeaguesDialog</class>
+ <widget class="QDialog" name="AllLeaguesDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>377</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Available Leagues</string>
+  </property>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>171</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>ENGLAND</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Premier League</string>
+    </property>
+    <property name="textAlignment">
+     <set>AlignLeading|AlignVCenter</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Championship</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>League One</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>League Two</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>National League</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SCOTLAND</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Premiership</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Championship SC</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>League One SC</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>League Two SC</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GERMANY</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Bundesliga</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Bundesliga Two</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SPAIN</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>La Liga</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>La Liga Two</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string notr="true">ITALY</string>
+    </property>
+    <property name="statusTip">
+     <string/>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Serie A</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Serie B</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>FRANCE</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Ligue One</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Ligue Two</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>OTHER EUROPEAN</string>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Belgium Jupiler Pro League</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Netherlands Eredivisie</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Portugal Primeira Liga</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Turkey Super Lig</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Greece Super League</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="availableLeaguesLabel">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>261</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Available Leagues</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>50</y>
+     <width>160</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="leagueLabel">
+      <property name="text">
+       <string>League</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="selectButton">
+      <property name="text">
+       <string>Select</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cancelButton">
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>220</y>
+     <width>160</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLabel" name="progressLabel">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="margin">
+       <number>-2</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

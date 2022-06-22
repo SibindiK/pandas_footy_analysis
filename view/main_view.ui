@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1382</width>
+    <height>877</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Football Analysis</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="statusLabel">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="5,2">
+      <item>
+       <widget class="QLabel" name="mainTableViewLabel">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Games Played</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="fixturesTableViewLabel">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Latest Fixtures</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5,2">
+      <item>
+       <widget class="QTableView" name="mainTableView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableView" name="fixturesTableView">
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1382</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuLoad">
+    <property name="title">
+     <string>Load</string>
+    </property>
+    <addaction name="actionAll_Main_Leagues"/>
+    <addaction name="actionSpecific_League"/>
+    <addaction name="actionLocal_File"/>
+    <addaction name="actionFootball_data_Website"/>
+   </widget>
+   <widget class="QMenu" name="menuExport">
+    <property name="title">
+     <string>Export</string>
+    </property>
+    <addaction name="actionWrite_to_Excel"/>
+   </widget>
+   <widget class="QMenu" name="menuAnalysis">
+    <property name="title">
+     <string>Analysis</string>
+    </property>
+    <addaction name="actionSelection"/>
+    <addaction name="actionOne_Team_Data"/>
+   </widget>
+   <widget class="QMenu" name="menuTables">
+    <property name="title">
+     <string>Tables</string>
+    </property>
+    <addaction name="actionLeague_Table"/>
+    <addaction name="actionHomes_Table"/>
+    <addaction name="actionAways_Table"/>
+    <addaction name="actionHalf_Time_Table"/>
+    <addaction name="actionHT_Homes_Table"/>
+    <addaction name="actionHT_Aways_Table"/>
+   </widget>
+   <widget class="QMenu" name="menuScored">
+    <property name="title">
+     <string>Scored</string>
+    </property>
+    <addaction name="actionFT_1_Scored"/>
+    <addaction name="actionFT_2_Scored"/>
+    <addaction name="actionHT_1_Scored"/>
+    <addaction name="actionHT_2_Scored"/>
+   </widget>
+   <widget class="QMenu" name="menuConceded">
+    <property name="title">
+     <string>Conceded</string>
+    </property>
+    <addaction name="actionFT_1_Conceded"/>
+    <addaction name="actionFT_2_Conceded"/>
+    <addaction name="actionHT_1_Conceded"/>
+    <addaction name="actionHT_2_Conceded"/>
+   </widget>
+   <widget class="QMenu" name="menuCards">
+    <property name="title">
+     <string>Cards</string>
+    </property>
+    <addaction name="actionYellow"/>
+    <addaction name="actionRed"/>
+    <addaction name="actionTotal_Cards"/>
+   </widget>
+   <widget class="QMenu" name="menuExit">
+    <property name="title">
+     <string>Exit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHome">
+    <property name="title">
+     <string>Home</string>
+    </property>
+    <addaction name="actionHomeScored_1"/>
+    <addaction name="actionHomeScored_2"/>
+    <addaction name="actionHomeConceded_1"/>
+    <addaction name="actionHomeConceded_2"/>
+    <addaction name="actionHomeHT_Scored_1"/>
+    <addaction name="actionHomeHT_Scored_2"/>
+    <addaction name="actionHomeHT_Conceded_1"/>
+    <addaction name="actionHomeHT_Conceded_2"/>
+    <addaction name="actionHomeYellow_Cards"/>
+    <addaction name="actionHomeRed_Cards"/>
+   </widget>
+   <widget class="QMenu" name="menuAway">
+    <property name="title">
+     <string>Away</string>
+    </property>
+    <addaction name="actionAwayScored_1"/>
+    <addaction name="actionAwayScored_2"/>
+    <addaction name="actionAwayConceded_1"/>
+    <addaction name="actionAwayConceded_2"/>
+    <addaction name="actionAwayHT_Scored_1"/>
+    <addaction name="actionAwayHT_Scored_2"/>
+    <addaction name="actionAwayHT_Conceded_1"/>
+    <addaction name="actionAwayHT_Conceded_2"/>
+    <addaction name="actionAwayYellow_Cards"/>
+    <addaction name="actionAwayRed_Cards"/>
+   </widget>
+   <addaction name="menuLoad"/>
+   <addaction name="menuTables"/>
+   <addaction name="menuScored"/>
+   <addaction name="menuConceded"/>
+   <addaction name="menuCards"/>
+   <addaction name="menuAnalysis"/>
+   <addaction name="menuExport"/>
+   <addaction name="menuHome"/>
+   <addaction name="menuAway"/>
+   <addaction name="menuExit"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAll_Main_Leagues">
+   <property name="text">
+    <string>All Main Leagues</string>
+   </property>
+  </action>
+  <action name="actionSpecific_League">
+   <property name="text">
+    <string>Specific League</string>
+   </property>
+  </action>
+  <action name="actionWrite_to_Excel">
+   <property name="text">
+    <string>Write to Excel</string>
+   </property>
+  </action>
+  <action name="actionSelection">
+   <property name="text">
+    <string>Teams Selection</string>
+   </property>
+  </action>
+  <action name="actionLocal_File">
+   <property name="text">
+    <string>Local File</string>
+   </property>
+  </action>
+  <action name="actionHomes_Table">
+   <property name="text">
+    <string>Homes</string>
+   </property>
+  </action>
+  <action name="actionAways_Table">
+   <property name="text">
+    <string>Aways</string>
+   </property>
+  </action>
+  <action name="action1_Goals_Scored">
+   <property name="text">
+    <string>1+ Goals Scored</string>
+   </property>
+  </action>
+  <action name="action2_Goals_Scored">
+   <property name="text">
+    <string>2+ Goals Scored</string>
+   </property>
+  </action>
+  <action name="action1_Goals_Scored_2">
+   <property name="text">
+    <string>1+ Goals Scored</string>
+   </property>
+  </action>
+  <action name="action2_Goals_Scored_2">
+   <property name="text">
+    <string>2+ Goals Scored</string>
+   </property>
+  </action>
+  <action name="actionFT_1_Scored">
+   <property name="text">
+    <string>FT 1+ Scored</string>
+   </property>
+  </action>
+  <action name="actionFT_2_Scored">
+   <property name="text">
+    <string>FT 2+ Scored</string>
+   </property>
+  </action>
+  <action name="actionHT_1_Scored">
+   <property name="text">
+    <string>HT 1+ Scored</string>
+   </property>
+  </action>
+  <action name="actionHT_2_Scored">
+   <property name="text">
+    <string>HT 2+ Scored</string>
+   </property>
+  </action>
+  <action name="actionFT_1_Conceded">
+   <property name="text">
+    <string>FT 1+ Conceded</string>
+   </property>
+  </action>
+  <action name="actionFT_2_Conceded">
+   <property name="text">
+    <string>FT 2+ Conceded</string>
+   </property>
+  </action>
+  <action name="actionHT_1_Conceded">
+   <property name="text">
+    <string>HT 1+ Conceded</string>
+   </property>
+  </action>
+  <action name="actionHT_2_Conceded">
+   <property name="text">
+    <string>HT 2+ Conceded</string>
+   </property>
+  </action>
+  <action name="actionLeague_Table">
+   <property name="text">
+    <string>League</string>
+   </property>
+  </action>
+  <action name="actionHalf_Time_Table">
+   <property name="text">
+    <string>Half Time</string>
+   </property>
+  </action>
+  <action name="actionYellow">
+   <property name="text">
+    <string>Yellow</string>
+   </property>
+  </action>
+  <action name="actionRed">
+   <property name="text">
+    <string>Red</string>
+   </property>
+  </action>
+  <action name="actionOne_Team_Data">
+   <property name="text">
+    <string>One Team Data</string>
+   </property>
+  </action>
+  <action name="actionFootball_data_Website">
+   <property name="text">
+    <string>Football-data Website</string>
+   </property>
+  </action>
+  <action name="actionHomeScored_1">
+   <property name="text">
+    <string>Scored 1+</string>
+   </property>
+  </action>
+  <action name="actionHomeScored_2">
+   <property name="text">
+    <string>Scored 2+</string>
+   </property>
+  </action>
+  <action name="actionHomeConceded_1">
+   <property name="text">
+    <string>Conceded 1+</string>
+   </property>
+  </action>
+  <action name="actionHomeConceded_2">
+   <property name="text">
+    <string>Conceded 2+</string>
+   </property>
+  </action>
+  <action name="actionHomeHT_Scored_1">
+   <property name="text">
+    <string>HT Scored 1+</string>
+   </property>
+  </action>
+  <action name="actionHomeHT_Scored_2">
+   <property name="text">
+    <string>HT Scored 2+</string>
+   </property>
+  </action>
+  <action name="actionHomeHT_Conceded_1">
+   <property name="text">
+    <string>HT Conceded 1+</string>
+   </property>
+  </action>
+  <action name="actionHomeHT_Conceded_2">
+   <property name="text">
+    <string>HT Conceded 2+</string>
+   </property>
+  </action>
+  <action name="actionHomeYellow_Cards">
+   <property name="text">
+    <string>Yellow Cards</string>
+   </property>
+  </action>
+  <action name="actionHomeRed_Cards">
+   <property name="text">
+    <string>Red Cards</string>
+   </property>
+  </action>
+  <action name="actionAwayScored_1">
+   <property name="text">
+    <string>Scored 1+</string>
+   </property>
+  </action>
+  <action name="actionAwayScored_2">
+   <property name="text">
+    <string>Scored 2+</string>
+   </property>
+  </action>
+  <action name="actionAwayConceded_1">
+   <property name="text">
+    <string>Conceded 1+</string>
+   </property>
+  </action>
+  <action name="actionAwayConceded_2">
+   <property name="text">
+    <string>Conceded 2+</string>
+   </property>
+  </action>
+  <action name="actionAwayHT_Scored_1">
+   <property name="text">
+    <string>HT Scored 1+</string>
+   </property>
+  </action>
+  <action name="actionAwayHT_Scored_2">
+   <property name="text">
+    <string>HT Scored 2+</string>
+   </property>
+  </action>
+  <action name="actionAwayHT_Conceded_1">
+   <property name="text">
+    <string>HT Conceded 1+</string>
+   </property>
+  </action>
+  <action name="actionAwayHT_Conceded_2">
+   <property name="text">
+    <string>HT Conceded 2+</string>
+   </property>
+  </action>
+  <action name="actionAwayYellow_Cards">
+   <property name="text">
+    <string>Yellow Cards</string>
+   </property>
+  </action>
+  <action name="actionAwayRed_Cards">
+   <property name="text">
+    <string>Red Cards</string>
+   </property>
+  </action>
+  <action name="actionTotal_Cards">
+   <property name="text">
+    <string>Total Cards</string>
+   </property>
+  </action>
+  <action name="actionHT_Homes_Table">
+   <property name="text">
+    <string>HT Homes</string>
+   </property>
+  </action>
+  <action name="actionHT_Aways_Table">
+   <property name="text">
+    <string>HT Aways</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

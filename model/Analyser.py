@@ -139,7 +139,7 @@ class Analyser():
             #Select only columns of interest
             _df = _df[[team_type,'Played','Won','Draw','Lost','GamesScored',
                     'Scored2','FailToScore',attribute,'HTAG','HomeHTPts']]
-            _df['Ratio'] = percentage_ratio(_df['GamesScored'], _df['Played'])
+            _df['Ratio%'] = percentage_ratio(_df['GamesScored'], _df['Played'])
         #User interested in Half time home goals conceded
         elif(attribute == 'HT Goals Conceded'):
             attribute = 'HTAG'
@@ -151,7 +151,7 @@ class Analyser():
             #Select only columns of interest
             _df = _df[[team_type,'Played','Won','Draw','Lost','GamesConceded',
                     attribute,'GamesScored','HTHG','HomeHTPts']]
-            _df['Ratio'] = percentage_ratio(_df['GamesConceded'], _df['Played'])
+            _df['Ratio%'] = percentage_ratio(_df['GamesConceded'], _df['Played'])
         #User interested in Full time home goals scored
         elif(attribute == 'FT Goals Scored'):
             attribute = 'FTHG'
@@ -159,11 +159,11 @@ class Analyser():
             attribute = 'FTAG'
         
         if (comparison == 'more than'):    
-            _df = _df.loc[_df['Ratio'] >= value,:]
+            _df = _df.loc[_df['Ratio%'] >= value,:]
         elif (comparison == 'less than'):
-            _df = _df.loc[_df['Ratio'] <= value,:]
-
-        _df = _df.sort_values(by='Ratio', ascending=False)
+            _df = _df.loc[_df['Ratio%'] <= value,:]
+        _df = self.prettify_table(_df, team_type)
+        _df = _df.sort_values(by='Ratio%', ascending=False)
         return _df
 
 #Pivot the data table by team type i.e hometeam or away team and get sum of attributes    
@@ -191,7 +191,6 @@ class Analyser():
                         'GamesScored','Scored2','FTHG','FailToScore',
                         'GamesConceded','HS','HST','HC','HY','HR']]
                 _df = _df.sort_values(by='HomePts', ascending=False)
-        
         #Aways Fulltime table
         elif (team_type == 'AwayTeam'):
                 self.insert_won_draw_lost_columns(_df, self.away_won, 
@@ -210,7 +209,6 @@ class Analyser():
 #Build halftime league tables
     def build_ht_league_table(self, team_type:str):
         _df = self.sum_up_table(team_type)
-
         #Homes Halftime table
         if (team_type == 'HomeTeam'):
                 self.insert_won_draw_lost_columns(_df, self.home_ht_won, 
@@ -223,7 +221,6 @@ class Analyser():
                         'GamesScored','Scored2','HTHG','FailToScore',
                         'GamesConceded']]
                 _df = _df.sort_values(by='HomeHTPts', ascending=False)
-        
         #Aways Halftime table
         elif (team_type == 'AwayTeam'):
                 self.insert_won_draw_lost_columns(_df, self.away_ht_won, 
@@ -236,13 +233,13 @@ class Analyser():
                         'GamesScored','Scored2','HTAG','FailToScore',
                         'GamesConceded']]
                 _df = _df.sort_values(by='AwayHTPts', ascending=False)
-
         _df = self.prettify_table(_df, team_type)
         return _df
                     
 #Combine homes and aways tables to build full time table 
-    def combine_homes_and_away_league_table(self, lg_type:str):
-        if (lg_type == 'FT'):
+    def combine_homes_and_away_league_table(self, game_type:str):
+        #param game_type - checks if we're interested in full time or half time stats  
+        if (game_type == 'FT'):
                 _homes_df = self.build_ft_league_table('HomeTeam')
                 _homes_df =_homes_df.rename(columns={'HomePts':'Points', 
                         'FTHG':'GoalsScored', 'HS':'Shots',
@@ -253,7 +250,7 @@ class Analyser():
                         'FTAG':'GoalsScored', 'AS':'Shots',
                         'AST':'ShotsTarget','AC':'Corners',
                         'AY':'Yellow','AR':'Red'})
-        elif (lg_type == 'HT'):
+        elif (game_type == 'HT'):
                 _homes_df = self.build_ht_league_table('HomeTeam')
                 _homes_df = _homes_df.rename(columns={'HomeHTPts':'Points', 
                         'HTHG':'GoalsScored'})
@@ -279,4 +276,18 @@ class Analyser():
 #Filter league table to get summary for only one team
     def get_one_team_summary(self, team_type:str, df:pd.DataFrame, team:str):
         _df = df.loc[df[team_type] == team]
+        return _df
+
+#Build scored 1+ analysis
+    def build_scored_analyis(self, game_type:str, goals:int):
+        _df = self.combine_homes_and_away_league_table(game_type)
+        _df['Scored1+%'] = percentage_ratio(_df['GamesScored'], _df['Played'])
+        _df['Scored2+%'] = percentage_ratio(_df['Scored2'], _df['Played'])
+        _df = _df[['Team','Played','GamesScored','Scored1+%','Scored2',
+                'Scored2+%','GoalsScored','FailToScore','GamesConceded']]
+        _df = self.prettify_table(_df, 'Team')
+        if (goals == 1):        
+                _df = _df.sort_values(by='Scored1+%', ascending=False)
+        elif (goals == 2):        
+                _df = _df.sort_values(by='Scored2+%', ascending=False)
         return _df

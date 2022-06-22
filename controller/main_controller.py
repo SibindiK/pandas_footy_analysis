@@ -58,7 +58,16 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
             lambda: self.display_ht_league_table('HomeTeam'))
         self.main_ui.actionHT_Aways_Table.triggered.connect(
             lambda: self.display_ht_league_table('AwayTeam'))    
-
+        #scored menus
+        self.main_ui.actionFT_1_Scored.triggered.connect(
+            lambda: self.games_scored('FT', 1))
+        self.main_ui.actionFT_2_Scored.triggered.connect(
+            lambda: self.games_scored('FT', 2))
+        self.main_ui.actionHT_1_Scored.triggered.connect(
+            lambda: self.games_scored('HT', 1))
+        self.main_ui.actionHT_2_Scored.triggered.connect(
+            lambda: self.games_scored('HT', 2))
+        #home and away scored menus
         self.main_ui.actionWrite_to_Excel.triggered.connect(
             self.export_to_excel)
         self.main_ui.actionSelection.triggered.connect(
@@ -146,6 +155,14 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
         else:
             _analyser = Analyser(self.my_active_df)
             self.view_active_data_frame(_analyser.combine_homes_and_away_league_table(type))
+
+#display data for goals scored
+    def games_scored(self, type:str, goals:int):
+        if (self.df_is_empty(self.my_active_df)):
+            self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
+        else:
+            _analyser = Analyser(self.my_active_df)
+            self.view_active_data_frame(_analyser.build_scored_analyis(type, goals))
 
 #Write data to excel
     def export_to_excel(self):

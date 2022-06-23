@@ -1,4 +1,5 @@
 import sys
+
 #Added sys.path.append to allow importing modules from folder structure 
 #See - https://www.youtube.com/watch?v=lR-OKnX7uOw
 sys.path.append("..")
@@ -16,8 +17,8 @@ from controller.one_team_selector import OneTeamSelector
 from model import constants as cc
 from model.data_import import FootyData
 from model.excel_files import MyExcelFile
+from model.league_builder import LeagueBuilder
 from model.pandas_df_model import PandasModel
-from model.Analyser import Analyser
 
 from view.main_view  import Ui_MainWindow
 
@@ -137,32 +138,32 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
         if (self.df_is_empty(self.my_active_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            _analyser = Analyser(self.my_active_df)
-            self.view_active_data_frame(_analyser.build_ft_league_table(type))
+            _ft_league = LeagueBuilder(self.my_active_df)
+            self.view_active_data_frame(_ft_league.build_ft_league_table(type))
 
 #display half time home or away league table
     def display_ht_league_table(self, type:str):
         if (self.df_is_empty(self.my_active_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            _analyser = Analyser(self.my_active_df)
-            self.view_active_data_frame(_analyser.build_ht_league_table(type))
+            _ht_league = LeagueBuilder(self.my_active_df)
+            self.view_active_data_frame(_ht_league.build_ht_league_table(type))
 
 #display league table that shows totals of all games, home and away
     def combined_league_table(self, type:str):
         if (self.df_is_empty(self.my_active_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            _analyser = Analyser(self.my_active_df)
-            self.view_active_data_frame(_analyser.combine_homes_and_away_league_table(type))
+            _league = LeagueBuilder(self.my_active_df)
+            self.view_active_data_frame(_league.combine_homes_and_away_league_table(type))
 
 #display data for goals scored
     def games_scored(self, type:str, goals:int):
         if (self.df_is_empty(self.my_active_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            _analyser = Analyser(self.my_active_df)
-            self.view_active_data_frame(_analyser.build_scored_analyis(type, goals))
+            _scored = LeagueBuilder(self.my_active_df)
+            self.view_active_data_frame(_scored.build_scored_analyis(type, goals))
 
 #Write data to excel
     def export_to_excel(self):

@@ -1,5 +1,8 @@
 import pandas as pd
 
+#Calculate percentage
+percentage_ratio = lambda x, y : round((x/y) * 100, 2)
+
 class Summariser():
     '''
     -creates the various analysis columns from the primary df
@@ -10,7 +13,7 @@ class Summariser():
 
     def get_summary_df(self):
         return self.df
-        
+
     def create_analysis_and_sum_columns(self):
 #convert 'H','D','A' results to points
         self.df['HomePts'] = self.df['FTR'].map({'H':3, 'A':0, 'D':1})
@@ -98,3 +101,36 @@ class Summariser():
         self.away_conceded = self.away_conceded['AwayTeam'].value_counts()
         self.away_ht_conceded = self.df.loc[self.df['HTHG'] > 0]
         self.away_ht_conceded = self.away_ht_conceded['AwayTeam'].value_counts()
+
+#Add won draw and lost columns
+    def insert_won_draw_lost_columns(self, df, won, draw, lost):
+        df.insert(2, 'Won', won)
+        df.insert(3, 'Draw', draw)
+        df.insert(4, 'Lost', lost)
+#Add scored columns        
+    def insert_scored_columns(self, df, scored, scored2, no_score):
+        df.insert(5, 'GamesScored', scored)
+        df.insert(6, 'Scored2', scored2)
+        df.insert(7, 'FailToScore', no_score)
+
+#Add goals conceded columns
+    def insert_goals_conceded_columns(self, df, conceded):
+        df['GamesConceded'] = conceded
+
+#Pivot the data table by team type i.e hometeam or away team and get sum of attributes    
+    def sum_up_table(self, team_type:str):
+        games_played = self.df[team_type].value_counts() #get number of games played
+        _df = pd.pivot_table(self.df, index=[team_type], aggfunc = 'sum')
+        _df[team_type] = _df.index
+        _df.insert(1, 'Played',games_played)
+        team_col = _df.pop(team_type)
+        _df.insert(0, team_type, team_col)
+        return _df
+
+#Change NA's to zeros and apply round 
+    def prettify_table(self, _df, team_type:str):
+        #remove the team names column as these are strings
+        team_col = _df.pop(team_type)
+        _df = _df.fillna(0).applymap(round)
+        _df.insert(0, team_type, team_col) #return team names 
+        return _df

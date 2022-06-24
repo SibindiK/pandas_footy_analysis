@@ -42,6 +42,15 @@ class Analyser(Summariser):
         #User interested in Full time home goals scored
         elif(attribute == 'FT Goals Scored'):
             attribute = 'FTHG'
+            super().insert_won_draw_lost_columns(_df, self.home_won, 
+                    self.home_draw, self.home_lost)
+            super().insert_scored_columns(_df, self.home_scored, 
+                    self.home_scored2, self.home_no_score)
+            #Select only columns of interest
+            _df = _df[[team_type,'Played','Won','Draw','Lost','GamesScored',
+                    'Scored2','FailToScore',attribute,'FTHG','HomePts']]
+            _df['Ratio%'] = percentage_ratio(_df['GamesScored'], _df['Played'])
+
         elif (attribute == 'FT Goals Conceded'):
             attribute = 'FTAG'
         

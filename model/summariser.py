@@ -1,8 +1,5 @@
 import pandas as pd
 
-#Calculate percentage
-percentage_ratio = lambda x, y : round((x/y) * 100, 2)
-
 class Summariser():
     '''
     -creates the various analysis columns from the primary df

@@ -1,11 +1,8 @@
 import pandas as pd
 
 from model.summariser import Summariser
-from model.summariser import percentage_ratio
+from model.helper_functions import percentage_ratio
 
-#FUTURE WORK - Investigate if goals scored analysis can be moved from this class 
-# Does class currently violate single responsibility principle?
-#KS - 23 June 2022
 class LeagueBuilder(Summariser):
     '''
     -creates the various analysis columns from the primary df
@@ -16,8 +13,8 @@ class LeagueBuilder(Summariser):
         super().__init__(df)
         self.df = super().get_summary_df()
 
-#Build fulltime league tables
     def build_ft_league_table(self, team_type:str):
+        '''Build fulltime league tables'''
         _df = super().sum_up_table(team_type)
         #Homes Fulltime table 
         if (team_type == 'HomeTeam'):
@@ -46,8 +43,8 @@ class LeagueBuilder(Summariser):
         _df = super().prettify_table(_df, team_type)
         return _df
 
-#Build halftime league tables
     def build_ht_league_table(self, team_type:str):
+        '''Build halftime league tables'''
         _df = super().sum_up_table(team_type)
         #Homes Halftime table
         if (team_type == 'HomeTeam'):
@@ -76,9 +73,10 @@ class LeagueBuilder(Summariser):
         _df = super().prettify_table(_df, team_type)
         return _df
                     
-#Combine homes and aways tables to build full time table 
     def combine_homes_and_away_league_table(self, game_type:str):
-        #param game_type - checks if we're interested in full time or half time stats  
+        '''Combine homes and aways tables to build full league table 
+           param game_type - checks if we're interested in full time or half time stats  
+        '''
         if (game_type == 'FT'):
                 _homes_df = self.build_ft_league_table('HomeTeam')
                 _homes_df =_homes_df.rename(columns={'HomePts':'Points', 
@@ -103,9 +101,8 @@ class LeagueBuilder(Summariser):
         _df = _df.sort_values(by='Points', ascending=False)
         return _df
 
-
-#Build scored 1+ analysis
     def build_scored_analyis(self, game_type:str, goals:int):
+        '''Build scored 1+ analysis'''
         _df = self.combine_homes_and_away_league_table(game_type)
         _df['Scored1+%'] = percentage_ratio(_df['GamesScored'], _df['Played'])
         _df['Scored2+%'] = percentage_ratio(_df['Scored2'], _df['Played'])
@@ -116,4 +113,14 @@ class LeagueBuilder(Summariser):
                 _df = _df.sort_values(by='Scored1+%', ascending=False)
         elif (goals == 2):        
                 _df = _df.sort_values(by='Scored2+%', ascending=False)
+        return _df
+
+    def get_one_team_games_df(self, team_type:str, team:str):
+        '''Filter df to get the home or awaygames for one particular team'''
+        _df = self.df.loc[self.df[team_type] == team,]
+        return _df
+
+    def get_one_team_summary(self, team_type:str, df:pd.DataFrame, team:str):
+        '''#Filter league table to get summary for only one team'''
+        _df = df.loc[df[team_type] == team]
         return _df

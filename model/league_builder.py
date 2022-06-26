@@ -1,5 +1,6 @@
 import pandas as pd
 
+from model import constants as cc
 from model.summariser import Summariser
 from model.helper_functions import percentage_ratio
 
@@ -24,9 +25,8 @@ class LeagueBuilder(Summariser):
                     self.home_scored2, self.home_no_score)
                 super().insert_goals_conceded_columns(_df,self.home_conceded)
                 #Select only columns of interest
-                _df = _df[[team_type,'Played','Won','Draw','Lost','HomePts',
-                        'GamesScored','Scored2','FTHG','FailToScore',
-                        'GamesConceded','HS','HST','HC','HY','HR']]
+                cc.FT_HOMES_TABLE_DATA_COLS.insert(0, team_type)
+                _df = _df[cc.FT_HOMES_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='HomePts', ascending=False)
         #Aways Fulltime table
         elif (team_type == 'AwayTeam'):
@@ -36,9 +36,8 @@ class LeagueBuilder(Summariser):
                     self.away_scored2, self.away_no_score)
                 super().insert_goals_conceded_columns(_df,self.away_conceded)
                 #Select only columns of interest
-                _df = _df[[team_type,'Played','Won','Draw','Lost','AwayPts',
-                        'GamesScored','Scored2','FTAG','FailToScore',
-                        'GamesConceded','AS','AST','AC','AY','AR']]
+                cc.FT_AWAYS_TABLE_DATA_COLS.insert(0, team_type)
+                _df = _df[cc.FT_AWAYS_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='AwayPts', ascending=False)
         _df = super().prettify_table(_df, team_type)
         return _df
@@ -54,9 +53,8 @@ class LeagueBuilder(Summariser):
                     self.home_ht_scored2, self.home_ht_no_score)
                 super().insert_goals_conceded_columns(_df,self.home_ht_conceded)
                 #Select only columns of interest
-                _df = _df[[team_type,'Played','Won','Draw','Lost','HomeHTPts',
-                        'GamesScored','Scored2','HTHG','FailToScore',
-                        'GamesConceded']]
+                cc.HT_HOMES_TABLE_DATA_COLS.insert(0, team_type)
+                _df = _df[cc.HT_HOMES_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='HomeHTPts', ascending=False)
         #Aways Halftime table
         elif (team_type == 'AwayTeam'):
@@ -66,9 +64,8 @@ class LeagueBuilder(Summariser):
                     self.away_ht_scored2, self.away_ht_no_score)
                 super().insert_goals_conceded_columns(_df,self.away_ht_conceded)
                 #Select only columns of interest
-                _df = _df[[team_type,'Played','Won','Draw','Lost','AwayHTPts',
-                        'GamesScored','Scored2','HTAG','FailToScore',
-                        'GamesConceded']]
+                cc.HT_AWAYS_TABLE_DATA_COLS.insert(0, team_type)
+                _df = _df[cc.HT_AWAYS_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='AwayHTPts', ascending=False)
         _df = super().prettify_table(_df, team_type)
         return _df

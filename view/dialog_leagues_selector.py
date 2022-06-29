@@ -14,9 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_AllLeaguesDialog(object):
     def setupUi(self, AllLeaguesDialog):
         AllLeaguesDialog.setObjectName("AllLeaguesDialog")
-        AllLeaguesDialog.resize(377, 488)
+        AllLeaguesDialog.resize(434, 488)
         self.listWidget = QtWidgets.QListWidget(AllLeaguesDialog)
-        self.listWidget.setGeometry(QtCore.QRect(20, 50, 171, 411))
+        self.listWidget.setGeometry(QtCore.QRect(20, 50, 221, 411))
         self.listWidget.setObjectName("listWidget")
         item = QtWidgets.QListWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -130,7 +130,7 @@ class Ui_AllLeaguesDialog(object):
         item = QtWidgets.QListWidgetItem()
         self.listWidget.addItem(item)
         self.availableLeaguesLabel = QtWidgets.QLabel(AllLeaguesDialog)
-        self.availableLeaguesLabel.setGeometry(QtCore.QRect(20, 10, 261, 31))
+        self.availableLeaguesLabel.setGeometry(QtCore.QRect(10, 10, 411, 31))
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setBold(True)
@@ -139,7 +139,7 @@ class Ui_AllLeaguesDialog(object):
         self.availableLeaguesLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.availableLeaguesLabel.setObjectName("availableLeaguesLabel")
         self.verticalLayoutWidget = QtWidgets.QWidget(AllLeaguesDialog)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(200, 50, 160, 131))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(259, 50, 161, 131))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -156,7 +156,7 @@ class Ui_AllLeaguesDialog(object):
         self.cancelButton.setObjectName("cancelButton")
         self.verticalLayout.addWidget(self.cancelButton)
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(AllLeaguesDialog)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(200, 220, 160, 151))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(260, 220, 160, 151))
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -237,13 +237,3 @@ class Ui_AllLeaguesDialog(object):
         self.leagueLabel.setText(_translate("AllLeaguesDialog", "League"))
         self.selectButton.setText(_translate("AllLeaguesDialog", "Select"))
         self.cancelButton.setText(_translate("AllLeaguesDialog", "Cancel"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    AllLeaguesDialog = QtWidgets.QDialog()
-    ui = Ui_AllLeaguesDialog()
-    ui.setupUi(AllLeaguesDialog)
-    AllLeaguesDialog.show()
-    sys.exit(app.exec_())

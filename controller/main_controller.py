@@ -34,7 +34,7 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
         self.f_data = FootyData(cc.ALL_EURO_LEAGUES_DATA_URL, cc.ALL_EURO_FIXTURES_URL)
         self.excel_file = MyExcelFile(cc.EXCEL_FILE_PATH)
         self.selected_league = SelectedLeague()
-        self.my_active_df = pd.DataFrame()
+        self.primary_df = pd.DataFrame()
         self.main_ui_events_manager()
 
 
@@ -92,7 +92,7 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
         self.f_data.set_main_leagues_df()
         self.f_data.set_latest_fixtures()
         self.view_active_data_frame(self.f_data.main_leagues_df, self.f_data.latest_fixtures)
-        self.my_active_df = self.f_data.main_leagues_df
+        self.primary_df = self.f_data.main_leagues_df
         self.main_ui.statusLabel.setText(cc.LOADING_COMPLETE_MESSAGE)
 
 #Load a specific league from the available selection
@@ -104,7 +104,7 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
             self.view_active_data_frame(self.f_data.one_league_df, _lg_fix_df)
         else:
             self.view_active_data_frame(self.f_data.one_league_df, self.f_data.empty_df)
-        self.my_active_df = self.f_data.one_league_df
+        self.primary_df = self.f_data.one_league_df
         self.selected_league.close()
         self.main_ui.statusLabel.setText(f"{self.selected_league.leagueLabel.text()}" +
                 cc.LOADING_COMPLETE_MESSAGE)
@@ -119,50 +119,50 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
 
 #Bring up analysis view to enable user to set parameter selections 
     def start_analysis(self):
-        if (self.df_is_empty(self.my_active_df)):
+        if (self.df_is_empty(self.primary_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            self.selected_analysis = AnalysisSelector(self.my_active_df)
+            self.selected_analysis = AnalysisSelector(self.primary_df)
             self.selected_analysis.show()
 
 #Bring up Ui for user to select only one team
     def display_one_team(self):
-        if (self.df_is_empty(self.my_active_df)):
+        if (self.df_is_empty(self.primary_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            self.selected_team = OneTeamSelector(self.my_active_df)
+            self.selected_team = OneTeamSelector(self.primary_df)
             self.selected_team.show()
 
 #display full time home or away league table
     def display_ft_league_table(self, type:str):
-        if (self.df_is_empty(self.my_active_df)):
+        if (self.df_is_empty(self.primary_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            _ft_league = LeagueBuilder(self.my_active_df)
+            _ft_league = LeagueBuilder(self.primary_df)
             self.view_active_data_frame(_ft_league.build_ft_league_table(type))
 
 #display half time home or away league table
     def display_ht_league_table(self, type:str):
-        if (self.df_is_empty(self.my_active_df)):
+        if (self.df_is_empty(self.primary_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            _ht_league = LeagueBuilder(self.my_active_df)
+            _ht_league = LeagueBuilder(self.primary_df)
             self.view_active_data_frame(_ht_league.build_ht_league_table(type))
 
 #display league table that shows totals of all games, home and away
     def combined_league_table(self, type:str):
-        if (self.df_is_empty(self.my_active_df)):
+        if (self.df_is_empty(self.primary_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            _league = LeagueBuilder(self.my_active_df)
+            _league = LeagueBuilder(self.primary_df)
             self.view_active_data_frame(_league.combine_homes_and_away_league_table(type))
 
 #display data for goals scored
     def games_scored(self, type:str, goals:int):
-        if (self.df_is_empty(self.my_active_df)):
+        if (self.df_is_empty(self.primary_df)):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
-            _scored = LeagueBuilder(self.my_active_df)
+            _scored = LeagueBuilder(self.primary_df)
             self.view_active_data_frame(_scored.build_scored_analyis(type, goals))
 
 #Write data to excel

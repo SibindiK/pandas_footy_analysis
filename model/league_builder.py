@@ -25,7 +25,6 @@ class LeagueBuilder(Summariser):
                     self.home_scored2, self.home_no_score)
                 super().insert_goals_conceded_columns(_df,self.home_conceded)
                 #Select only columns of interest
-                cc.FT_HOMES_TABLE_DATA_COLS.insert(0, team_type)
                 _df = _df[cc.FT_HOMES_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='HomePts', ascending=False)
         #Aways Fulltime table
@@ -36,7 +35,6 @@ class LeagueBuilder(Summariser):
                     self.away_scored2, self.away_no_score)
                 super().insert_goals_conceded_columns(_df,self.away_conceded)
                 #Select only columns of interest
-                cc.FT_AWAYS_TABLE_DATA_COLS.insert(0, team_type)
                 _df = _df[cc.FT_AWAYS_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='AwayPts', ascending=False)
         _df = super().prettify_table(_df, team_type)
@@ -53,7 +51,6 @@ class LeagueBuilder(Summariser):
                     self.home_ht_scored2, self.home_ht_no_score)
                 super().insert_goals_conceded_columns(_df,self.home_ht_conceded)
                 #Select only columns of interest
-                cc.HT_HOMES_TABLE_DATA_COLS.insert(0, team_type)
                 _df = _df[cc.HT_HOMES_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='HomeHTPts', ascending=False)
         #Aways Halftime table
@@ -64,7 +61,6 @@ class LeagueBuilder(Summariser):
                     self.away_ht_scored2, self.away_ht_no_score)
                 super().insert_goals_conceded_columns(_df,self.away_ht_conceded)
                 #Select only columns of interest
-                cc.HT_AWAYS_TABLE_DATA_COLS.insert(0, team_type)
                 _df = _df[cc.HT_AWAYS_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='AwayHTPts', ascending=False)
         _df = super().prettify_table(_df, team_type)

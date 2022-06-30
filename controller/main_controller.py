@@ -68,6 +68,16 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
             lambda: self.games_scored('HT', 1))
         self.main_ui.actionHT_2_Scored.triggered.connect(
             lambda: self.games_scored('HT', 2))
+        #conceded menus
+        self.main_ui.actionFT_1_Conceded.triggered.connect(
+            lambda: self.games_conceded('FT', 1))
+        self.main_ui.actionFT_2_Conceded.triggered.connect(
+            lambda: self.games_conceded('FT', 2))
+        self.main_ui.actionHT_1_Conceded.triggered.connect(
+            lambda: self.games_conceded('HT', 1))
+        self.main_ui.actionHT_2_Conceded.triggered.connect(
+            lambda: self.games_conceded('HT', 2))
+
         #home and away scored menus
         self.main_ui.actionWrite_to_Excel.triggered.connect(
             self.export_to_excel)
@@ -163,7 +173,15 @@ class MainController(qtw.QMainWindow, Ui_MainWindow):
             self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
         else:
             _scored = LeagueBuilder(self.primary_df)
-            self.view_active_data_frame(_scored.build_scored_analyis(type, goals))
+            self.view_active_data_frame(_scored.build_scored_table(type, goals))
+
+#display data for goals scored
+    def games_conceded(self, type:str, goals:int):
+        if (self.df_is_empty(self.primary_df)):
+            self.main_ui.statusLabel.setText(cc.NO_DATA_MESSAGE)
+        else:
+            _conceded = LeagueBuilder(self.primary_df)
+            self.view_active_data_frame(_conceded.build_conceded_table(type, goals))
 
 #Write data to excel
     def export_to_excel(self):

@@ -8,4 +8,5 @@ class AnalysisGoalsScored(AnalysisStrategy):
     def analyse(self, df:pd.DataFrame):
         '''perform the analysis'''
         df['Ratio%'] = percentage_ratio(df['GamesScored'], df['Played'])
+        df = df.sort_values(by='Ratio%', ascending=False)
         return df

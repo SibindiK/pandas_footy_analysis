@@ -23,7 +23,8 @@ class LeagueBuilder(Summariser):
                     self.home_draw, self.home_lost)
                 super().insert_scored_columns(_df, self.home_scored, 
                     self.home_scored2, self.home_no_score)
-                super().insert_goals_conceded_columns(_df,self.home_conceded)
+                super().insert_games_conceded_column(_df,self.home_conceded)
+                super().insert_games_conceded2_column(_df,self.home_conceded2)
                 #Select only columns of interest
                 _df = _df[cc.FT_HOMES_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='HomePts', ascending=False)
@@ -33,7 +34,8 @@ class LeagueBuilder(Summariser):
                     self.away_draw, self.away_lost)
                 super().insert_scored_columns(_df, self.away_scored, 
                     self.away_scored2, self.away_no_score)
-                super().insert_goals_conceded_columns(_df,self.away_conceded)
+                super().insert_games_conceded_column(_df,self.away_conceded)
+                super().insert_games_conceded2_column(_df,self.away_conceded2)
                 #Select only columns of interest
                 _df = _df[cc.FT_AWAYS_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='AwayPts', ascending=False)
@@ -49,7 +51,8 @@ class LeagueBuilder(Summariser):
                     self.home_ht_draw, self.home_ht_lost)
                 super().insert_scored_columns(_df, self.home_ht_scored, 
                     self.home_ht_scored2, self.home_ht_no_score)
-                super().insert_goals_conceded_columns(_df,self.home_ht_conceded)
+                super().insert_games_conceded_column(_df,self.home_ht_conceded)
+                super().insert_games_conceded2_column(_df,self.home_ht_conceded2)
                 #Select only columns of interest
                 _df = _df[cc.HT_HOMES_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='HomeHTPts', ascending=False)
@@ -59,7 +62,8 @@ class LeagueBuilder(Summariser):
                     self.away_ht_draw, self.away_ht_lost)
                 super().insert_scored_columns(_df, self.away_ht_scored, 
                     self.away_ht_scored2, self.away_ht_no_score)
-                super().insert_goals_conceded_columns(_df,self.away_ht_conceded)
+                super().insert_games_conceded_column(_df,self.away_ht_conceded)
+                super().insert_games_conceded2_column(_df,self.away_ht_conceded2)
                 #Select only columns of interest
                 _df = _df[cc.HT_AWAYS_TABLE_DATA_COLS]
                 _df = _df.sort_values(by='AwayHTPts', ascending=False)
@@ -94,18 +98,32 @@ class LeagueBuilder(Summariser):
         _df = _df.sort_values(by='Points', ascending=False)
         return _df
 
-    def build_scored_analyis(self, game_type:str, goals:int):
-        '''Build scored 1+ analysis'''
+    def build_scored_table(self, game_type:str, goals:int):
+        '''Build scored 1+ or 2+ table'''
         _df = self.combine_homes_and_away_league_table(game_type)
         _df['Scored1+%'] = percentage_ratio(_df['GamesScored'], _df['Played'])
         _df['Scored2+%'] = percentage_ratio(_df['Scored2'], _df['Played'])
-        _df = _df[['Team','Played','GamesScored','Scored1+%','Scored2',
-                'Scored2+%','GoalsScored','FailToScore','GamesConceded']]
+        _df = _df[['Team','Played','GamesScored','Scored1+%','Scored2','Scored2+%',
+                'GoalsScored','FailToScore','GamesConceded','GamesConceded2']]
         _df = super().prettify_table(_df, 'Team')
         if (goals == 1):        
                 _df = _df.sort_values(by='Scored1+%', ascending=False)
         elif (goals == 2):        
                 _df = _df.sort_values(by='Scored2+%', ascending=False)
+        return _df
+
+    def build_conceded_table(self, game_type:str, goals:int):
+        '''Build conceded 1+ or 2+ table'''
+        _df = self.combine_homes_and_away_league_table(game_type)
+        _df['Conceded1+%'] = percentage_ratio(_df['GamesConceded'], _df['Played'])
+        _df['Conceded2+%'] = percentage_ratio(_df['GamesConceded2'], _df['Played'])
+        _df = _df[['Team','Played','GamesConceded','Conceded1+%','GamesConceded2',
+                'Conceded2+%','FailToScore','GamesScored','Scored2','GoalsScored']]
+        _df = super().prettify_table(_df, 'Team')
+        if (goals == 1):        
+                _df = _df.sort_values(by='Conceded1+%', ascending=False)
+        elif (goals == 2):        
+                _df = _df.sort_values(by='Conceded2+%', ascending=False)
         return _df
 
     def get_one_team_games_df(self, team_type:str, team:str):

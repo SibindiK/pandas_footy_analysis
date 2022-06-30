@@ -20,16 +20,16 @@ FIXTURES_DATA_COLS = ['Div','Date','Time','HomeTeam','AwayTeam']
 
 FT_HOMES_TABLE_DATA_COLS = ['HomeTeam','Played','Won','Draw','Lost','HomePts',
                         'GamesScored','Scored2','FTHG','FailToScore',
-                        'GamesConceded','HS','HST','HC','HY','HR']
+                        'GamesConceded','GamesConceded2','HS','HST','HC','HY','HR']
 
 FT_AWAYS_TABLE_DATA_COLS = ['AwayTeam','Played','Won','Draw','Lost','AwayPts',
                         'GamesScored','Scored2','FTAG','FailToScore',
-                        'GamesConceded','AS','AST','AC','AY','AR']
+                        'GamesConceded','GamesConceded2','AS','AST','AC','AY','AR']
 
 HT_HOMES_TABLE_DATA_COLS = ['HomeTeam','Played','Won','Draw','Lost','HomeHTPts',
                         'GamesScored','Scored2','HTHG','FailToScore',
-                        'GamesConceded']
+                        'GamesConceded','GamesConceded2']
 
 HT_AWAYS_TABLE_DATA_COLS = ['AwayTeam','Played','Won','Draw','Lost','AwayHTPts',
                         'GamesScored','Scored2','HTAG','FailToScore',
-                        'GamesConceded']
+                        'GamesConceded','GamesConceded2']

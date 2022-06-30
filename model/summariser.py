@@ -57,6 +57,12 @@ class Summariser():
         self.home_conceded = self.home_conceded['HomeTeam'].value_counts()
         self.home_ht_conceded = self.df.loc[self.df['HTAG'] > 0]
         self.home_ht_conceded = self.home_ht_conceded['HomeTeam'].value_counts()
+#Home full time and half time conceded 2+
+        self.home_conceded2 = self.df.loc[self.df['FTAG'] > 1]
+        self.home_conceded2 = self.home_conceded2['HomeTeam'].value_counts()
+        self.home_ht_conceded2 = self.df.loc[self.df['HTAG'] > 1]
+        self.home_ht_conceded2 = self.home_ht_conceded2['HomeTeam'].value_counts()
+
 
 #Away full time and half time wins
         self.away_won = self.df.loc[self.df['FTR']=='A']
@@ -98,6 +104,11 @@ class Summariser():
         self.away_conceded = self.away_conceded['AwayTeam'].value_counts()
         self.away_ht_conceded = self.df.loc[self.df['HTHG'] > 0]
         self.away_ht_conceded = self.away_ht_conceded['AwayTeam'].value_counts()
+#Away full time and half time conceded2
+        self.away_conceded2 = self.df.loc[self.df['FTHG'] > 1]
+        self.away_conceded2 = self.away_conceded2['AwayTeam'].value_counts()
+        self.away_ht_conceded2 = self.df.loc[self.df['HTHG'] > 1]
+        self.away_ht_conceded2 = self.away_ht_conceded2['AwayTeam'].value_counts()
 
 #Add won draw and lost columns
     def insert_won_draw_lost_columns(self, df, won, draw, lost):
@@ -110,9 +121,13 @@ class Summariser():
         df.insert(6, 'Scored2', scored2)
         df.insert(7, 'FailToScore', no_score)
 
-#Add goals conceded columns
-    def insert_goals_conceded_columns(self, df, conceded):
+#Add games conceded 1+ goals columns
+    def insert_games_conceded_column(self, df, conceded):
         df['GamesConceded'] = conceded
+
+#Add goals conceded 2+ goals columns
+    def insert_games_conceded2_column(self, df, conceded):
+        df['GamesConceded2'] = conceded
 
 #Pivot the data table by team type i.e hometeam or away team and get sum of attributes    
     def sum_up_table(self, team_type:str):
